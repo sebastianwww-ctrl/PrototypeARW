@@ -1,0 +1,2 @@
+# PrototypeARW
+Self propagating ai
