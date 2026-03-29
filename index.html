@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Neural Chat Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #chat {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+            background-color: white;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        input[type="button"] {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Adaptive Neural Chat Simulator</h1>
+    <div id="chat"></div>
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <input type="button" value="Send" id="sendButton">
+
+    <script>
+        // Initialize the knowledge base and rules
+        let knowledgeBase = JSON.parse(localStorage.getItem('knowledgeBase')) || {};
+        let ruleWeights = JSON.parse(localStorage.getItem('ruleWeights')) || {};
+
+        // Function to save the knowledge base to localStorage
+        function saveKnowledgeBase() {
+            localStorage.setItem('knowledgeBase', JSON.stringify(knowledgeBase));
+            localStorage.setItem('ruleWeights', JSON.stringify(ruleWeights));
+        }
+
+        // Function to handle user input
+        function handleUserInput() {
+            const userInput = document.getElementById('userInput').value;
+            const chatDiv = document.getElementById('chat');
+            chatDiv.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+
+            // Process the input and generate response
+            const response = generateResponse(userInput);
+            chatDiv.innerHTML += `<p><strong>Bot:</strong> ${response}</p>`;
+            document.getElementById('userInput').value = '';
+            saveKnowledgeBase();
+        }
+
+        // Function to generate a response based on user input and rule weights
+        function generateResponse(input) {
+            const responses = [
+                'That sounds interesting!',
+                'Can you tell me more?',
+                'I see, thank you for sharing.',
+                'How does that make you feel?'
+            ];
+            // Simple weight-based response simulation
+            const randomIndex = Math.floor(Math.random() * responses.length);
+            return responses[randomIndex];
+        }
+
+        // Add event listener for send button
+        document.getElementById('sendButton').addEventListener('click', handleUserInput);
+
+        // Loading previous conversations from localStorage
+        const previousConversations = localStorage.getItem('previousConversations');
+        if (previousConversations) {
+            document.getElementById('chat').innerHTML += previousConversations;
+        }
+    </script>
+</body>
+</html>
