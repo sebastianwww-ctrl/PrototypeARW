@@ -1,39 +1,19 @@
 <html>
 <head>
     <title>Adaptive Neural Chat Prototype</title>
-    <script>
-        // Initialize localStorage KB
-        let localStorageKB = localStorage.getItem('kb') ? JSON.parse(localStorage.getItem('kb')) : {};
-
-        // Function to modify rule weights dynamically
-        function updateRuleWeight(rule, weight) {
-            if (localStorageKB[rule]) {
-                localStorageKB[rule].weight = weight;
-            } else {
-                localStorageKB[rule] = { weight: weight };
-            }
-            localStorage.setItem('kb', JSON.stringify(localStorageKB));
-        }
-
-        // Function for RAG retrieval
-        function retrieveFromKB(query) {
-            return localStorageKB[query] ? localStorageKB[query].response : "No data found";
-        }
-
-        // Learning ability to adapt response
-        function learn(query, response) {
-            updateRuleWeight(query, (localStorageKB[query]?.weight || 1) + 1);
-            localStorageKB[query] = { response: response, weight: localStorageKB[query]?.weight || 1 };
-            localStorage.setItem('kb', JSON.stringify(localStorageKB));
-        }
-
-        // Example usage
-        learn('Hello', 'Hi there! How can I help you?');
-        console.log(retrieveFromKB('Hello'));
-    </script>
 </head>
 <body>
-    <h1>Adaptive Neural Chat Prototype</h1>
-    <p>This is a prototype featuring persistent localStorage KB, mutable rule weights, RAG retrieval, and learning capabilities.</p>
+    <h1>Welcome to the Adaptive Neural Chat Prototype</h1>
+    <p>This prototype features:</p>
+    <ul>
+        <li>Persistent localStorage knowledge base</li>
+        <li>Mutable rule weights</li>
+        <li>RAG retrieval</li>
+        <li>Few-shot learning</li>
+        <li>System parameter tuning</li>
+    </ul>
+    <script>
+        // Implement functionality - localStorage, rule weights, RAG, etc.
+    </script>
 </body>
 </html>
